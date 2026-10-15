@@ -34,3 +34,15 @@ Git worktree list及Git版本只读检查成功；独立分支已实际使用，
 
 ## 远端验收增量
 2026-10-15T18:34:39.131096+08:00：初次记录提交 0be0c663687935f31fd777905eb11b39d5b13b8f 已推送 test/jd-recovery-002。另建空 bare 仓库从 origin 浅取回，FETCH_HEAD 与该提交完全一致，并重新读取索引和决定；GitHub连接器也独立回读索引成功。这证明远端可取回，但 bare 仓库仍在同一云环境，不证明真正跨环境或跨轮恢复。附件交付仍待界面下载确认。
+
+## 独立跨轮恢复与附件最小补正（本轮实测）
+时间：2026-10-15T03:39:39.474776-07:00（America/Los_Angeles）。
+- 本轮实际执行 git fetch origin refs/heads/test/jd-recovery-002:refs/remotes/origin/test/jd-recovery-002，退出码0；git rev-parse refs/remotes/origin/test/jd-recovery-002 返回 68d18e4e2239814001d7b6fe0f9024aed6bd8c67，与首轮报告一致。
+- 随后分别执行 git show refs/remotes/origin/test/jd-recovery-002:records/INDEX.md 与 git show refs/remotes/origin/test/jd-recovery-002:records/JD-RECOVERY-002.md，实际读取全文后恢复决定、依据、已做/未做和下一步。本轮跨轮文件读取通过；不是跨环境全案灾备验收。
+- 文件实际值：决定仍为“家点先完成能力验证，通过后再接续项目资料；本轮不学习全案、不开发网站。”依据仍为 JD-RECOVERY-002 v1.1。私有资料持久保存与独立取回方案仍为“尚未建立”。
+- 原TXT/PDF/DOCX/ZIP仍在本地；本轮未重做、未重测内容。检查当前全部工具元数据及原生附件接口：codex_app__list_artifacts 返回 artifacts=[]；attach_artifact只支持pull_request，不支持任意文件。
+- 存在 chatgpt_space_write_page_reference：可向已授权可写Page的规范Files目的地上传（最大10MiB），必填真实page_id和本地file，成功后可返回持久reference、sha256、file_access_confirmed。当前没有已选定、获准的目标Page，未调用上传，未创建新Page/工作台。upload_artifact_images只面向已有原生表格/演示/Canvas图片，不是通用附件交付。
+- 当前未发现独立的“本地任意文件→本聊天附件/个人Library可下载文件”发布接口。download_file是入站下载，不是出站发布；/workspace/library-files为空，目录本身不证明Library发布能力。Drive/Slack上传属于外部目的地，不等于原生附件，本轮未使用。
+- 补正：上一轮本机文件链接不是原生交付回执。当前原生附件交付仍受阻，无file_id、持久附件引用或用户下载成功回执，不要求用户重复点击本机路径。
+- 下一步由协调方落实已授权的现有可写Page目的地，或提供支持直接文件发布的原生工具；然后仅上传原无敏感测试文件并按实际回执验收。私有全案保存方案、中文扫描OCR、官方法源和真正跨环境恢复仍未验收。
+- 本轮不改main，不迁移全案、不新增工作台、不扩权限、不付费、不改名、不联系他人。
